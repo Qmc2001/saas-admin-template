@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trình Tạo Thumbnail - C08Plus</title>
+    <meta name="description" content="Tạo thumbnail chuyên nghiệp cho blog, video và mạng xã hội">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo"><i class="fas fa-image"></i><span>Trình Tạo Thumbnail - C08Plus</span></div>
+                <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i><span>Dark Mode</span></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="app-title">
+            <h1>Trình Tạo Thumbnail Chuyên Nghiệp</h1>
+            <p>Tạo thumbnail đẹp mắt cho blog, video và mạng xã hội của bạn</p>
+        </div>
+
+        <div class="generator-container">
+            <div class="controls">
+                <div class="control-group">
+                    <label for="layout">Bố cục (Layout)</label>
+                    <select id="layout">
+                        <option value="layout-default">Mặc định (Trên & Dưới)</option>
+                        <option value="layout-centered">Căn giữa</option>
+                        <option value="layout-split">Chia đôi</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="title">Tiêu đề</label>
+                    <input type="text" id="title" placeholder="Nhập tiêu đề" value="10 Things I Learned While Doing Nothing">
+                </div>
+                <div class="control-group">
+                    <label for="description">Mô tả</label>
+                    <textarea id="description" rows="2" placeholder="Nhập mô tả">A fun list of lessons from doing absolutely nothing.</textarea>
+                </div>
+                <div class="control-group">
+                    <label for="organization">Tổ chức/Công ty</label>
+                    <input type="text" id="organization" placeholder="Tên công ty" value="My Company">
+                </div>
+                
+                <div class="control-group">
+                    <label for="organizationColor">Màu sắc Tổ chức</label>
+                    <input type="color" id="organizationColor" class="color-input" value="#4361ee">
+                </div>
+                <div class="control-group">
+                    <label for="patternColor">Màu sắc Họa tiết</label>
+                    <input type="color" id="patternColor" class="color-input" value="#e6eafb">
+                </div>
+
+                <div class="control-group">
+                    <label for="logoUpload">Logo</label>
+                    <label for="logoUpload" class="file-input-label">
+                        <span id="logoFileName">Chưa chọn tệp nào</span><i class="fas fa-upload"></i>
+                    </label>
+                    <input type="file" id="logoUpload" class="file-input" accept="image/*">
+                </div>
+
+                <div class="control-group">
+                    <label>Nền (Background)</label>
+                    <select id="bgType">
+                        <option value="solid">Màu đơn (Solid)</option>
+                        <option value="gradient">Dải màu (Gradient)</option>
+                        <option value="image">Ảnh nền (Image)</option>
+                    </select>
+                </div>
+                <div id="bgControls">
+                    <div class="control-group" id="solidColorControl">
+                        <label for="bgColor">Màu nền</label>
+                        <input type="color" id="bgColor" class="color-input" value="#f0f7ff">
+                    </div>
+                    <div class="color-input-group" id="gradientColorControl" style="display: none;">
+                        <div><label for="gradientColor1">Màu 1</label><input type="color" id="gradientColor1" class="color-input" value="#4361ee"></div>
+                        <div><label for="gradientColor2">Màu 2</label><input type="color" id="gradientColor2" class="color-input" value="#f72585"></div>
+                    </div>
+                    <div class="control-group" id="imageControl" style="display: none;">
+                        <label for="bgImageUpload">Ảnh nền</label>
+                        <label for="bgImageUpload" class="file-input-label">
+                            <span id="bgImageFileName">Chưa chọn tệp nào</span><i class="fas fa-upload"></i>
+                        </label>
+                        <input type="file" id="bgImageUpload" class="file-input" accept="image/*">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label for="textColor">Màu chữ</label>
+                    <input type="color" id="textColor" class="color-input" value="#2b2d42">
+                </div>
+                <div class="control-group">
+                    <label for="fontFamily">Phông chữ</label>
+                    <select id="fontFamily">
+                        <option value="DM Sans, sans-serif">DM Sans</option>
+                        <option value="Arial, sans-serif">Arial</option>
+                        <option value="Georgia, serif">Georgia</option>
+                        <option value="'Courier New', monospace">Courier New</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="titleFontSize">Cỡ chữ Tiêu đề: <span id="titleFontSizeValue">5</span></label>
+                    <input type="range" id="titleFontSize" min="1" max="15" value="5" step="0.1">
+                </div>
+                 <div class="control-group">
+                    <label for="descFontSize">Cỡ chữ Mô tả: <span id="descFontSizeValue">3</span></label>
+                    <input type="range" id="descFontSize" min="1" max="10" value="3" step="0.1">
+                </div>
+                <div class="control-group">
+                    <label style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" id="textShadow" checked>
+                        <span>Đổ bóng chữ</span>
+                    </label>
+                </div>
+
+                <div class="control-group">
+                    <label for="ratio">Tỷ lệ</label>
+                    <select id="ratio">
+                        <option value="16/9">16:9 (YouTube, Facebook)</option>
+                        <option value="1/1">1:1 (Instagram Post)</option>
+                        <option value="4/3">4:3 (Presentation)</option>
+                        <option value="9/16">9:16 (Story, Reels, Shorts)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="preview-container">
+                <div class="thumbnail-preview" id="thumbnailPreview">
+                    <div class="thumbnail-content" id="thumbnailContent">
+                        <div class="thumbnail-header">
+                            <div class="thumbnail-logo" id="previewLogo">MC</div>
+                            <div class="thumbnail-organization" id="previewOrganization">My Company</div>
+                        </div>
+                        <div class="thumbnail-main">
+                            <div class="thumbnail-title" id="previewTitle">10 Things I Learned While Doing Nothing</div>
+                            <div class="thumbnail-description" id="previewDescription">A fun list of lessons from doing absolutely nothing.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" id="resetBtn"><i class="fas fa-redo"></i> Reset</button>
+                    <button class="btn btn-primary" id="exportBtn"><i class="fas fa-external-link-alt"></i> Export</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="exportModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Export Thumbnail</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="control-group">
+                    <label for="filename">Filename</label>
+                    <input type="text" id="filename" value="thumbnail-1920x1080">
+                </div>
+                <div class="control-group">
+                    <label for="resolution">Resolution</label>
+                    <select id="resolution">
+                        <option value="1920x1080">1920x1080 (Full HD)</option>
+                        <option value="1280x720">1280x720 (HD)</option>
+                        <option value="1080x1080">1080x1080 (Square)</option>
+                        <option value="1080x1920">1080x1920 (Story)</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="fileformat">File format</label>
+                    <select id="fileformat">
+                        <option value="png">PNG</option>
+                        <option value="jpeg">JPEG</option>
+                        <option value="webp">WebP</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelExport">Cancel</button>
+                <button class="btn btn-download" id="downloadThumbnail"><i class="fas fa-download"></i> Download</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2025 C08Plus Thumbnail Generator. All Rights Reserved.</p>
+            <button class="theme-toggle" id="footerThemeToggle"><i class="fas fa-moon"></i><span>Dark Mode</span></button>
+        </div>
+    </footer>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
